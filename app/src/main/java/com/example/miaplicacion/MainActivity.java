@@ -1,6 +1,10 @@
 package com.example.miaplicacion;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,44 +15,58 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String BASE_URL = "https://api.openweathermap.org/data/2.5/";
-    private static final String API_KEY = "062402bc288251c20f1360fd8b0df956"; // Reemplaza con tu clave de API
+import java.util.List;
 
-    private TextView temperatureTextView;
+public class MainActivity extends AppCompatActivity {
+
+    private TextView textViewResultado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        temperatureTextView = findViewById(R.id.temperatureTextView);
+        textViewResultado = findViewById(R.id.textViewResultado); // Obtén la referencia al TextView
 
-        // Configurar Retrofit
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        APIService apiService = RetrofitClient.getApiService();
 
-        // Crear una instancia de la interfaz de la API
-        WeatherApi weatherApi = retrofit.create(WeatherApi.class);
-
-        // Realizar la solicitud a la API
-        Call<WeatherResponse> call = weatherApi.getWeather("Barcelona", API_KEY);
-        call.enqueue(new Callback<WeatherResponse>() {
+        Call<List<Pregunta>> call = apiService.getPreguntas();
+        call.enqueue(new Callback<List<Pregunta>>() {
             @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+            public void onResponse(Call<List<Pregunta>> call, Response<List<Pregunta>> response) {
                 if (response.isSuccessful()) {
-                    WeatherResponse weatherResponse = response.body();
-                    if (weatherResponse != null) {
-                        double temperature = weatherResponse.getMain().getTemperature();
-                        temperatureTextView.setText(String.format("%.1f°C", temperature));
+                    List<Pregunta> preguntas = response.body();
+                    if (preguntas != null) {
+                        Log.d("TAG", "va");
+
+                        // Actualiza el contenido del TextView con los datos recibidos
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (Pregunta pregunta : preguntas) {
+                            stringBuilder.append("ID: ").append(pregunta.getId()).append("\n");
+                            stringBuilder.append("Texto: ").append(pregunta.getPregunta()).append("\n\n");
+
+                        }
+                        final String resultText = stringBuilder.toString();
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textViewResultado.setText(resultText);
+                            }
+                        });
+                    } else {
+                        // Manejar el caso donde preguntas es nulo
+                        Log.d("TAG", "La lista de preguntas es nula");
                     }
+                } else {
+                    // Manejar errores
+                    Log.d("TAG", "No se pudo obtener la lista de preguntas");
                 }
             }
 
             @Override
-            public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                // Manejar errores de la solicitud
+            public void onFailure(@NonNull Call<List<Pregunta>> call, @NonNull Throwable t) {
+                // Manejar errores de conexión
+                Log.d("TAG", "Error de conexión: " + t.getMessage());
             }
         });
     }
