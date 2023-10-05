@@ -5,7 +5,6 @@ public class Pregunta {
     private String pregunta;
     private List<Respuesta> respostes;
     private int resposta_correcta;
-    private String imatge;
 
     public int getId() {
         return id;
@@ -37,13 +36,5 @@ public class Pregunta {
 
     public void setResposta_correcta(int resposta_correcta) {
         this.resposta_correcta = resposta_correcta;
-    }
-
-    public String getImatge() {
-        return imatge;
-    }
-
-    public void setImatge(String imatge) {
-        this.imatge = imatge;
     }
 }
