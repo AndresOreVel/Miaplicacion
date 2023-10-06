@@ -2,10 +2,16 @@ package com.example.miaplicacion;
 
 public class Respuesta {
     private int id;
-    private String imagenURL;
-    public String getImagenURL() {
-        return imagenURL;
+
+    public String getImagen() {
+        return imagen;
     }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    private String imagen;
     public int getId() {
         return id;
     }
@@ -13,7 +19,5 @@ public class Respuesta {
     public void setId(int id) {
         this.id = id;
     }
-    public void setImagenURL(String imagenURL) {
-        this.imagenURL = imagenURL;
-    }
+
     }

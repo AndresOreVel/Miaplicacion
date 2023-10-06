@@ -18,40 +18,40 @@
 
             <TextView
                 android:id="@+id/textViewResultado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:text=""
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageViewPregunta1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center"
                 android:contentDescription="Pregunta1" />
 
             <ImageView
                 android:id="@+id/imageViewPregunta2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center"
                 android:contentDescription="Pregunta2" />
 
             <ImageView
                 android:id="@+id/imageViewPregunta3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center"
                 android:contentDescription="Pregunta3" />
 
             <ImageView
                 android:id="@+id/imageViewPregunta4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center"
                 android:contentDescription="Pregunta4" />

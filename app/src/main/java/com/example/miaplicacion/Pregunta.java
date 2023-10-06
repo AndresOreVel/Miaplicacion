@@ -3,7 +3,7 @@ import java.util.List;
 public class Pregunta {
     private int id;
     private String pregunta;
-    private List<Respuesta> respostes;
+    private List<Respuesta> opciones;
     private int resposta_correcta;
 
     public int getId() {
@@ -22,12 +22,12 @@ public class Pregunta {
         this.pregunta = pregunta;
     }
 
-    public List<Respuesta> getRespostes() {
-        return respostes;
+    public List<Respuesta> getOpciones() {
+        return opciones;
     }
 
-    public void setRespostes(List<Respuesta> respostes) {
-        this.respostes = respostes;
+    public void setOpciones(List<Respuesta> opciones) {
+        this.opciones = opciones;
     }
 
     public int getResposta_correcta() {

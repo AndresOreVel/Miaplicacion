@@ -1,7 +1,5 @@
 package com.example.miaplicacion;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import retrofit2.Call;
@@ -92,17 +88,20 @@ public class MainActivity extends AppCompatActivity {
     private void mostrarPregunta(Pregunta pregunta) {
         // Actualizar el contenido del TextView con la pregunta
         textViewResultado.setText("ID: " + pregunta.getId() + "\nTexto: " + pregunta.getPregunta());
-
+        Log.d("eRROR", String.valueOf(pregunta.getOpciones()));
         // Cargar las 4 imágenes de la pregunta desde las URLs utilizando Picasso
-        if (pregunta.getRespostes() != null && pregunta.getRespostes().size() >= 4) {
+        if (pregunta.getOpciones() != null && pregunta.getOpciones().size() >= 4) {
             for (int i = 0; i < 4; i++) {
-                Respuesta respuesta = pregunta.getRespostes().get(i);
-                cargarImagenConPicasso(respuesta.getImagenURL(), imageViewsPregunta[i]);
+                Log.d("Error", "valeeee");
+                Respuesta respuesta = pregunta.getOpciones().get(i);
+                cargarImagenConPicasso(respuesta.getImagen(), imageViewsPregunta[i]);
+
             }
         }
     }
 
     private void cargarImagenConPicasso(String url, ImageView imageView) {
+
         Picasso.get().load(url).into(imageView);
     }
 }
